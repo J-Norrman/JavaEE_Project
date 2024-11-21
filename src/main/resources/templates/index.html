@@ -2,52 +2,65 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Home</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
 </head>
 <body>
 <header>
     <h1>Welcome to Weather App</h1>
 </header>
 <main>
-    <h2>Enter City Name:</h2>
-    <form th:action="@{/weather/search}" method="get">
-        <input type="text" name="city" placeholder="Enter city" required />
-        <button type="submit">Search</button>
-    </form>
-
-    <!-- Display weather information if available -->
-    <div th:if="${weatherData != null}">
-        <h3>Current weather in <span th:text="${weatherData.city_name}"></span></h3>
-        <p>Temperature: <span th:text="${weatherData.temp}"></span>°C</p>
-        <p>Wind direction: <span th:text="${weatherData.wind_cdir_full}"></span></p> <!-- Assuming wind_cdir_full is the condition -->
-        <p>Wind Speed: <span th:text="${weatherData.wind_spd}"></span> km/h</p>
-        <p>Sunrise: <span th:text="${weatherData.sunrise}"></span></p>
-        <p>Sunset: <span th:text="${weatherData.sunset}"></span></p>
-        <p>Precipitation: <span th:text="${weatherData.precip}"></span> mm</p>
+    <!-- Buttons to toggle between Current Weather and Forecast -->
+    <div class="buttons">
+        <button onclick="showSearchBar('current')">Current Weather</button>
+        <button onclick="showSearchBar('forecast')">Forecast</button>
     </div>
-    <div th:if="${weatherData == null}">
-        <p>No weather data available. Please try a different city.</p>
-    </div>
-    <h2>Enter City Name:</h2>
-    <form th:action="@{/forecast/search}" method="get">
-        <input type="text" name="city" placeholder="Enter city" required />
-        <button type="submit">Search</button>
-    </form>
-    <div th:if="${forecastData != null}">
-        <h3>Weather in <span th:text="${forecastData.city_name}"></span></h3>
 
-        <!-- Loop through forecasts -->
-        <div th:each="forecast : ${forecastData.forecasts}">
-            <h4>Forecast for <span th:text="${forecast.valid_date}"></span> (<span th:text="${forecast.day_of_week}"></span>)</h4>
-            <p>Temperature: <span th:text="${forecast.temp}"></span>°C</p>
-            <p>Max Temperature: <span th:text="${forecast.max_temp}"></span>°C</p>
-            <p>Min Temperature: <span th:text="${forecast.min_temp}"></span>°C</p>
-            <p>Wind Speed: <span th:text="${forecast.wind_spd}"></span> km/h</p>
-            <p>Wind Direction: <span th:text="${forecast.wind_cdir_full}"></span></p>
+    <!-- Search bar for Current Weather -->
+    <div id="currentWeatherSearch" class="search-bar"
+         th:classappend="${weatherData != null or (weatherData == null and forecastData == null)} ? ' active' : ''">
+        <form th:action="@{/weather/search}" method="get">
+            <input type="text" name="city" placeholder="Enter city" required />
+            <button type="submit">Search</button>
+        </form>
+        <!-- Display Current Weather information -->
+        <div class="results" th:if="${weatherData != null}">
+            <h3>Current weather in <span th:text="${weatherData.city_name}"></span></h3>
+            <p>Temperature: <span th:text="${weatherData.temp}"></span>°C</p>
+            <p>Wind Direction: <span th:text="${weatherData.wind_cdir_full}"></span></p>
+            <p>Wind Speed: <span th:text="${weatherData.wind_spd}"></span> km/h</p>
+            <p>Sunrise: <span th:text="${weatherData.sunrise}"></span></p>
+            <p>Sunset: <span th:text="${weatherData.sunset}"></span></p>
+            <p>Precipitation: <span th:text="${weatherData.precip}"></span> mm</p>
+        </div>
+        <div class="results" th:if="${weatherData == null}">
+            <p>No weather data available. Please try a different city.</p>
         </div>
     </div>
-    <div th:if="${forecastData == null}">
-        <p>No weather data available. Please try a different city.</p>
+
+    <!-- Search bar for Forecast -->
+    <div id="forecastSearch" class="search-bar"
+         th:classappend="${forecastData != null} ? ' active' : ''">
+        <form th:action="@{/forecast/search}" method="get">
+            <input type="text" name="city" placeholder="Enter city" required />
+            <button type="submit">Search</button>
+        </form>
+        <!-- Display Forecast information -->
+        <div class="results" th:if="${forecastData != null}">
+            <h3>Weather Forecast in <span th:text="${forecastData.city_name}"></span></h3>
+            <div th:each="forecast : ${forecastData.forecasts}">
+                <h4>Forecast for <span th:text="${forecast.valid_date}"></span> (<span th:text="${forecast.day_of_week}"></span>)</h4>
+                <p>Temperature: <span th:text="${forecast.temp}"></span>°C</p>
+                <p>Max Temperature: <span th:text="${forecast.max_temp}"></span>°C</p>
+                <p>Min Temperature: <span th:text="${forecast.min_temp}"></span>°C</p>
+                <p>Wind Speed: <span th:text="${forecast.wind_spd}"></span> km/h</p>
+                <p>Wind Direction: <span th:text="${forecast.wind_cdir_full}"></span></p>
+            </div>
+        </div>
+        <div class="results" th:if="${forecastData == null}">
+            <p>No forecast data available. Please try a different city.</p>
+        </div>
     </div>
 </main>
+<script th:src="@{/js/scripts.js}"></script>
 </body>
 </html>

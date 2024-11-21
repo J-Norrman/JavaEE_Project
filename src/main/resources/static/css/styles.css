@@ -1,0 +1,46 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #1c233a;
+    color: white;
+    padding: 10px 0;
+}
+
+main {
+    margin-top: 50px;
+}
+
+.buttons {
+    margin-bottom: 20px;
+}
+
+.buttons button {
+    margin: 0 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.search-bar {
+    display: none;
+    margin: 20px auto;
+    width: 300px;
+    text-align: left;
+}
+
+.search-bar.active {
+    display: block;
+}
+
+.results {
+    margin-top: 20px;
+    text-align: left;
+    background-color: #f2f2f2;
+    padding: 15px;
+    border-radius: 5px;
+}
