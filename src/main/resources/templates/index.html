@@ -6,9 +6,16 @@
 </head>
 <body>
 <header>
-    <h1>Welcome to Weather App</h1>
+    <div class="header-container">
+        <h1>Welcome to Weather App</h1>
+    <div class="redi-buttons">
+        <button onclick="window.location.href='/login'">Login</button>
+        <button onclick="window.location.href='/register'">Register</button>
+    </div>
+    </div>
 </header>
 <main>
+
     <!-- Buttons to toggle between Current Weather and Forecast -->
     <div class="buttons">
         <button onclick="showSearchBar('current')">Current Weather</button>
@@ -24,6 +31,7 @@
         </form>
         <!-- Display Current Weather information -->
         <div class="results" th:if="${weatherData != null}">
+            <div class="results-card">
             <h3>Current weather in <span th:text="${weatherData.city_name}"></span></h3>
             <p>Temperature: <span th:text="${weatherData.temp}"></span>°C</p>
             <p>Wind Direction: <span th:text="${weatherData.wind_cdir_full}"></span></p>
@@ -31,9 +39,10 @@
             <p>Sunrise: <span th:text="${weatherData.sunrise}"></span></p>
             <p>Sunset: <span th:text="${weatherData.sunset}"></span></p>
             <p>Precipitation: <span th:text="${weatherData.precip}"></span> mm</p>
+            </div>
         </div>
         <div class="results" th:if="${weatherData == null}">
-            <p>No weather data available. Please try a different city.</p>
+            <p>Check the current weather of a city.</p>
         </div>
     </div>
 
@@ -47,17 +56,22 @@
         <!-- Display Forecast information -->
         <div class="results" th:if="${forecastData != null}">
             <h3>Weather Forecast in <span th:text="${forecastData.city_name}"></span></h3>
-            <div th:each="forecast : ${forecastData.forecasts}">
-                <h4>Forecast for <span th:text="${forecast.valid_date}"></span> (<span th:text="${forecast.day_of_week}"></span>)</h4>
-                <p>Temperature: <span th:text="${forecast.temp}"></span>°C</p>
-                <p>Max Temperature: <span th:text="${forecast.max_temp}"></span>°C</p>
-                <p>Min Temperature: <span th:text="${forecast.min_temp}"></span>°C</p>
-                <p>Wind Speed: <span th:text="${forecast.wind_spd}"></span> km/h</p>
-                <p>Wind Direction: <span th:text="${forecast.wind_cdir_full}"></span></p>
+            <div class="forecast-grid">
+                <div th:each="forecast : ${forecastData.forecasts}" class="results-card">
+                    <h4>
+                        <span th:text="${forecast.valid_date}"></span>
+                        (<span th:text="${forecast.day_of_week}"></span>)
+                    </h4>
+                    <p>Temperature: <span th:text="${forecast.temp}"></span>°C</p>
+                    <p>Max Temp: <span th:text="${forecast.max_temp}"></span>°C</p>
+                    <p>Min Temp: <span th:text="${forecast.min_temp}"></span>°C</p>
+                    <p>Wind Speed: <span th:text="${forecast.wind_spd}"></span> km/h</p>
+                    <p>Wind Direction: <span th:text="${forecast.wind_cdir_full}"></span></p>
+                </div>
             </div>
         </div>
         <div class="results" th:if="${forecastData == null}">
-            <p>No forecast data available. Please try a different city.</p>
+            <p>Check the weather forecast for a city.</p>
         </div>
     </div>
 </main>

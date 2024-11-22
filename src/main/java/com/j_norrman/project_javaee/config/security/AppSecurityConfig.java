@@ -38,11 +38,12 @@ public class AppSecurityConfig {
         http
 
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/**").permitAll()
+                        .requestMatchers("/**","/login","/register").permitAll()
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .requestMatchers("/account/**").hasAnyRole("USER","ADMIN")
                 )
-                .formLogin(withDefaults()
+                .formLogin(httpSecurityFormLoginConfigurer ->httpSecurityFormLoginConfigurer
+                        .loginPage("/login")
                 )
                 .logout(logout -> logout
                         .logoutSuccessUrl("/").permitAll()

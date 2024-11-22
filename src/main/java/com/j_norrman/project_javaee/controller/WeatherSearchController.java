@@ -16,12 +16,7 @@ public class WeatherSearchController {
         this.restTemplate = restTemplate;
     }
 
-    @GetMapping("/")
-    public String index(Model model) {
-        model.addAttribute("weatherData", null);
-        model.addAttribute("forecastData", null);
-        return "index";
-    }
+
 
     @GetMapping("/weather/search")
     public String searchWeather(@RequestParam("city") String city, Model model) {
