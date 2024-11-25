@@ -14,5 +14,21 @@
         </div>
     </div>
 </header>
+<main>
+    <form th:action="@{/login}" method="post">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required="required" />
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required="required" />
+
+        <button type="submit">Login</button>
+    </form>
+
+    <!-- Display error message -->
+    <div th:if="${param.error}">
+        <p style="color: red;">Invalid username or password.</p>
+    </div>
+</main>
 </body>
 </html>

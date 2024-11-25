@@ -15,7 +15,9 @@
     </div>
 </header>
 <main>
-
+    <div th:if="${authentication != null}">
+        <h2>Welcome, <span th:text="${authentication.name}"></span></h2>
+    </div>
     <!-- Buttons to toggle between Current Weather and Forecast -->
     <div class="buttons">
         <button onclick="showSearchBar('current')">Current Weather</button>

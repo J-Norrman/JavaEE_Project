@@ -44,9 +44,12 @@ public class AppSecurityConfig {
                 )
                 .formLogin(httpSecurityFormLoginConfigurer ->httpSecurityFormLoginConfigurer
                         .loginPage("/login")
+                        .defaultSuccessUrl("/",true)
+                        .failureUrl("/login?error=true")
+                        .permitAll()
                 )
                 .logout(logout -> logout
-                        .logoutSuccessUrl("/").permitAll()
+                        .logoutSuccessUrl("/login?logout=true").permitAll()
                 );
 
         return http.build();

@@ -4,6 +4,7 @@ import com.j_norrman.project_javaee.authorities.UserRole;
 import com.j_norrman.project_javaee.model.CustomUser;
 import com.j_norrman.project_javaee.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +21,15 @@ public class AppController {
     public String index(Model model) {
         model.addAttribute("weatherData", null);
         model.addAttribute("forecastData", null);
+        model.addAttribute("authentication", SecurityContextHolder.getContext().getAuthentication());
+
+        System.out.println("Accessing the home page");
+        if (SecurityContextHolder.getContext().getAuthentication() != null) {
+            String username = SecurityContextHolder.getContext().getAuthentication().getName();
+            System.out.println("Current authenticated user: " + username);
+        } else {
+            System.out.println("No authenticated user found.");
+        }
         return "index";
     }
     @GetMapping("/register")
@@ -29,6 +39,16 @@ public class AppController {
     }
     @GetMapping("/login")
     public String login(Model model) {
+        System.out.println("Accessing the login page.");
+
+        if (SecurityContextHolder.getContext().getAuthentication() != null) {
+            String username = SecurityContextHolder.getContext().getAuthentication().getName();
+            System.out.println("Current authenticated user: " + username);
+        } else {
+            System.out.println("No authenticated user found.");
+        }
+
         return "login";
+
     }
 }

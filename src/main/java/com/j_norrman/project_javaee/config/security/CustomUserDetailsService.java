@@ -1,6 +1,7 @@
 package com.j_norrman.project_javaee.config.security;
 
 import com.j_norrman.project_javaee.model.CustomUser;
+import com.j_norrman.project_javaee.model.CustomUserDetails;
 import com.j_norrman.project_javaee.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,8 +18,10 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return userRepository.findByUsername(username)
+        CustomUser customUser = userRepository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found with username: " + username));
 
+        // Return CustomUserDetails
+        return CustomUserDetails.fromCustomUser(customUser);
     }
 }

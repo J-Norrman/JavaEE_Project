@@ -82,10 +82,10 @@ public class CustomUser implements UserDetails {
     public void setPassword(String password) {
         this.password = password;
     }
-    public UserRole getRoles() {
+    public UserRole getRole() {
         return role;
     }
-    public void setRoles(UserRole role) {
+    public void setRole(UserRole role) {
         this.role = role;
     }
 
