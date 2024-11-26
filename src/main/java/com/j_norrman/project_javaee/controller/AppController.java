@@ -21,7 +21,7 @@ public class AppController {
     public String index(Model model) {
         model.addAttribute("weatherData", null);
         model.addAttribute("forecastData", null);
-        model.addAttribute("authentication", SecurityContextHolder.getContext().getAuthentication());
+        
 
         System.out.println("Accessing the home page");
         if (SecurityContextHolder.getContext().getAuthentication() != null) {
@@ -37,6 +37,7 @@ public class AppController {
 
         return "register";
     }
+
     @GetMapping("/login")
     public String login(Model model) {
         System.out.println("Accessing the login page.");

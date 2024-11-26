@@ -7,6 +7,9 @@
 </head>
 <body>
 <header>
+    <div th:if="${param.logout}">
+        <p>You have been logged out successfully!</p>
+    </div>
     <div class="header-container">
         <h1>Login page</h1>
         <div class="redi-buttons">
@@ -15,6 +18,12 @@
     </div>
 </header>
 <main>
+    <div th:if="${message}" class="success-message">
+        <p th:text="${message}"></p>
+    </div>
+    <div th:if="${error}" class="error-message">
+        <p th:text="${error}"></p>
+    </div>
     <form th:action="@{/login}" method="post">
         <label for="username">Username:</label>
         <input type="text" id="username" name="username" required="required" />
