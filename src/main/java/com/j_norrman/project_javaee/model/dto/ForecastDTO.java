@@ -5,9 +5,27 @@ public class ForecastDTO {
     private double max_temp;
     private double min_temp;
     private double wind_spd;
+    private double precip;
+    private double snow;
     private String wind_cdir_full;
     private String valid_date;
     private String day_of_week;
+
+    public double getPrecip() {
+        return precip;
+    }
+
+    public void setPrecip(double precip) {
+        this.precip = precip;
+    }
+
+    public double getSnow() {
+        return snow;
+    }
+
+    public void setSnow(double snow) {
+        this.snow = snow;
+    }
 
     public double getTemp() {
         return temp;

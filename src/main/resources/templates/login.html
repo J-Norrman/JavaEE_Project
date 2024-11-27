@@ -7,8 +7,11 @@
 </head>
 <body>
 <header>
-    <div th:if="${param.logout}">
+    <div th:if="${loggedOut == true}">
         <p>You have been logged out successfully!</p>
+    </div>
+    <div th:if="${loggedOut == false}">
+        <p>Unable to log out, please log in!</p>
     </div>
     <div class="header-container">
         <h1>Login page</h1>
@@ -23,6 +26,9 @@
     </div>
     <div th:if="${error}" class="error-message">
         <p th:text="${error}"></p>
+    </div>
+    <div th:if="${registrationSuccess}">
+        <p style="color: green;">Registration successful! Please log in.</p>
     </div>
     <form th:action="@{/login}" method="post">
         <label for="username">Username:</label>

@@ -15,11 +15,8 @@
     </div>
 </header>
 <main>
-    <div th:if="${message}" class="success-message">
-        <p th:text="${message}"></p>
-    </div>
-    <div th:if="${error}" class="error-message">
-        <p th:text="${error}"></p>
+    <div th:if="${registrationError}">
+        <p style="color: red;">Registration failed. Please try again.</p>
     </div>
     <form th:action="@{/register}" method="post">
         <div>

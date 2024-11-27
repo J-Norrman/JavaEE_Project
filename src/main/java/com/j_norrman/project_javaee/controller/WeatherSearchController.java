@@ -22,7 +22,7 @@ public class WeatherSearchController {
     public String searchWeather(@RequestParam("city") String city, Model model) {
         WeatherDataDTO weatherData = fetchWeatherData(city);
         model.addAttribute("weatherData", weatherData);
-        model.addAttribute("forecastData", null); // Ensure forecastData is null
+        model.addAttribute("forecastData", null);
         return "index";
     }
 
@@ -36,7 +36,7 @@ public class WeatherSearchController {
             return weatherData;
         } catch (Exception e) {
             System.err.println("Error fetching weather data: " + e.getMessage());
-            return null; // Return null if there's an error
+            return null;
         }
     }
 }

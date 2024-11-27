@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Logout</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+</head>
+<body>
+<header>
+    <div class="header-container">
+        <h1>Logout page</h1>
+        <div class="redi-buttons">
+            <button onclick="window.location.href='/'">Home</button>
+        </div>
+    </div>
+</header>
+<h1>Do you want to log out</h1>
+<form th:action="@{/logout}" method="post" >
+    <button type="submit">Logout</button>
+</form>
+</body>
+</html>

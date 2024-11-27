@@ -20,12 +20,12 @@ public class ForecastSearchController {
     public String searchForecast(@RequestParam("city") String city, Model model) {
         ForecastDataDTO forecastData = fetchForecastData(city);
         model.addAttribute("forecastData", forecastData);
-        model.addAttribute("weatherData", null); // Ensure weatherData is null
+        model.addAttribute("weatherData", null);
         return "index";
     }
 
     private ForecastDataDTO fetchForecastData(String city) {
-        String forecastApiUrl = "http://localhost:8081/forecast?city=" + city; // Adjust if different
+        String forecastApiUrl = "http://localhost:8081/forecast?city=" + city;
         System.out.println("Calling WeatherApp API for forecast with URL: " + forecastApiUrl);
         try {
             ForecastDataDTO forecastData = restTemplate.getForObject(forecastApiUrl, ForecastDataDTO.class);
@@ -34,7 +34,7 @@ public class ForecastSearchController {
             return forecastData;
         } catch (Exception e) {
             System.err.println("Error fetching forecast data: " + e.getMessage());
-            return null; // Return null if there's an error
+            return null;
         }
     }
 }

@@ -11,9 +11,8 @@
     <div class="redi-buttons">
         <button onclick="window.location.href='/login'">Login</button>
         <button onclick="window.location.href='/register'">Register</button>
-        <form th:action="@{/logout}" method="post" >
-            <button type="submit">Logout</button>
-        </form>
+        <button onclick="window.location.href='/logout'">Logout</button>
+
     </div>
     </div>
 </header>
@@ -24,20 +23,16 @@
     <div th:if="${#authentication == null or not #authentication.authenticated}">
         <h2>Welcome, Guest!</h2>
     </div>
-    <!-- Buttons to toggle between Current Weather and Forecast -->
     <div class="buttons">
         <button onclick="showSearchBar('current')">Current Weather</button>
         <button onclick="showSearchBar('forecast')">Forecast</button>
     </div>
-
-    <!-- Search bar for Current Weather -->
     <div id="currentWeatherSearch" class="search-bar"
          th:classappend="${weatherData != null or (weatherData == null and forecastData == null)} ? ' active' : ''">
         <form th:action="@{/weather/search}" method="get">
             <input type="text" name="city" placeholder="Enter city" required />
             <button type="submit">Search</button>
         </form>
-        <!-- Display Current Weather information -->
         <div class="results" th:if="${weatherData != null}">
             <div class="results-card">
             <h3>Current weather in <span th:text="${weatherData.city_name}"></span></h3>
@@ -54,14 +49,12 @@
         </div>
     </div>
 
-    <!-- Search bar for Forecast -->
     <div id="forecastSearch" class="search-bar"
          th:classappend="${forecastData != null} ? ' active' : ''">
         <form th:action="@{/forecast/search}" method="get">
             <input type="text" name="city" placeholder="Enter city" required />
             <button type="submit">Search</button>
         </form>
-        <!-- Display Forecast information -->
         <div class="results" th:if="${forecastData != null}">
             <h3>Weather Forecast in <span th:text="${forecastData.city_name}"></span></h3>
             <div class="forecast-grid">
@@ -74,6 +67,8 @@
                     <p>Max Temp: <span th:text="${forecast.max_temp}"></span>°C</p>
                     <p>Min Temp: <span th:text="${forecast.min_temp}"></span>°C</p>
                     <p>Wind Speed: <span th:text="${forecast.wind_spd}"></span> km/h</p>
+                    <p>Precipitation: <span th:text="${forecast.precip}"></span> mm</p>
+                    <p>Snow: <span th:text="${forecast.snow}"></span> mm</p>
                     <p>Wind Direction: <span th:text="${forecast.wind_cdir_full}"></span></p>
                 </div>
             </div>

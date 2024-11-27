@@ -3,14 +3,16 @@ package com.j_norrman.project_javaee.controller;
 import com.j_norrman.project_javaee.authorities.UserRole;
 import com.j_norrman.project_javaee.model.CustomUser;
 import com.j_norrman.project_javaee.service.UserService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-@RestController
+@Controller
 public class UserController {
 
     private final UserService userService;
@@ -31,19 +33,20 @@ public class UserController {
         );
     }
     @PostMapping("/register")
-    public String registerUser(
-            @RequestParam String username,
-            @RequestParam String password,
-            RedirectAttributes redirectAttributes) {
+    public String registerUser(@RequestParam String username,
+                               @RequestParam String password) {
         try {
+            // Assuming userService.createUser() creates the user
             userService.createUser(username, passwordEncoder.encode(password), UserRole.USER);
-            redirectAttributes.addFlashAttribute("message", "Registration successful! Please log in.");
-            System.out.println("Registration successful, redirecting to /login");
-            return "redirect:/login";
+            System.out.println("Registration successful, redirecting to /register with success flag.");
+
+            // Redirect to register page with success parameter
+            return "redirect:/login?success=true";
         } catch (IllegalArgumentException e) {
-            redirectAttributes.addFlashAttribute("error", e.getMessage());
-            System.out.println("Registration failed, redirecting back to /register");
-            return "redirect:/register";
+            System.out.println("Registration failed, redirecting to /register with error flag.");
+
+            // Redirect back to register page with error parameter
+            return "redirect:/register?error=true";
         }
     }
 }
