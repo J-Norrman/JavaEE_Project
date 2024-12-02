@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Account</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+
+</head>
+<body>
+<header class="header-container">
+    <h1>Account</h1>
+    <div class="redi-buttons">
+        <button onclick="window.location.href='/'">Home</button>
+    </div>
+</header>
+<div>
+    <div>
+        <p>Username: <span th:text="${username}"></span></p>
+        <p>Password: <span th:text="${password}"></span></p>
+        <p>Authorities: <span th:text="${authority}"></span></p>
+    </div>
+    <div sec:authorize="hasRole('ROLE_ADMIN')">
+        <table>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Username</th>
+                <th>Password</th>
+                <th>Role</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="user : ${users}">
+                <td th:text="${user.getId()}"></td>
+                <td th:text="${user.getUsername()}"></td>
+                <td th:text="${user.getPassword()}"></td>
+                <td th:text="${user.getRole()}"></td>
+                <td>
+                    <form th:action="@{/account/delete/{id}(id=${user.id})}">
+                        <button type="submit">Delete</button>
+                    </form>
+
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

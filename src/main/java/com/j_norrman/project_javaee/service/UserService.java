@@ -5,8 +5,11 @@ import com.j_norrman.project_javaee.model.CustomUser;
 import com.j_norrman.project_javaee.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserService {
+
     private final UserRepository userRepository;
 
     public UserService(UserRepository userRepository) {
@@ -19,5 +22,11 @@ public class UserService {
         }
         CustomUser newUser = new CustomUser(username, password, role);
         return userRepository.save(newUser);
+    }
+    public List<CustomUser> getAllUsers() {
+        return userRepository.findAll();
+    }
+    public void deleteUser(Long id) {
+        userRepository.deleteById(id);
     }
 }
