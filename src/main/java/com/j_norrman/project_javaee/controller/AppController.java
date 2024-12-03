@@ -96,7 +96,6 @@ public class AppController {
     public String Account(Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         List<CustomUser> users= userService.getAllUsers();
-
         System.out.println("Accessing the Account page.");
         if (SecurityContextHolder.getContext().getAuthentication() != null) {
             String username = SecurityContextHolder.getContext().getAuthentication().getName();
@@ -106,6 +105,9 @@ public class AppController {
             model.addAttribute("authority", user.getAuthorities());
             model.addAttribute("users", users);
             System.out.println("Current authenticated user: " + username);
+        }else if(SecurityContextHolder.getContext().getAuthentication()==null){
+            System.out.println("No authenticated user found.");
+            return "redirect:/login";
         }
         return "account";
     }

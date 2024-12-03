@@ -18,16 +18,16 @@ public class UserController {
     private final UserService userService;
     private final PasswordEncoder passwordEncoder;
 
-
     public UserController(UserService userService, PasswordEncoder passwordEncoder) {
         this.userService = userService;
         this.passwordEncoder = passwordEncoder;
     }
 
     @GetMapping("/createDebugUser")
+    @ResponseBody
     public CustomUser createDebugUser() {
         return userService.createUser(
-                "Bob",
+                "Admin",
                 passwordEncoder.encode("123"),
                 UserRole.ADMIN
         );
@@ -36,16 +36,11 @@ public class UserController {
     public String registerUser(@RequestParam String username,
                                @RequestParam String password) {
         try {
-            // Assuming userService.createUser() creates the user
             userService.createUser(username, passwordEncoder.encode(password), UserRole.USER);
             System.out.println("Registration successful, redirecting to /register with success flag.");
-
-            // Redirect to register page with success parameter
             return "redirect:/login?success=true";
         } catch (IllegalArgumentException e) {
             System.out.println("Registration failed, redirecting to /register with error flag.");
-
-            // Redirect back to register page with error parameter
             return "redirect:/register?error=true";
         }
     }
