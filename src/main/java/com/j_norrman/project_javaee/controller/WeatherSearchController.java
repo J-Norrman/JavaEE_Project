@@ -16,8 +16,6 @@ public class WeatherSearchController {
         this.restTemplate = restTemplate;
     }
 
-
-
     @GetMapping("/weather/search")
     public String searchWeather(@RequestParam("city") String city, Model model) {
         WeatherDataDTO weatherData = fetchWeatherData(city);

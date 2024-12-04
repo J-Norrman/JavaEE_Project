@@ -1,6 +1,5 @@
 package com.j_norrman.project_javaee.model;
 
-import com.j_norrman.project_javaee.authorities.UserPermission;
 import com.j_norrman.project_javaee.authorities.UserRole;
 import jakarta.persistence.*;
 import jakarta.persistence.Id;
