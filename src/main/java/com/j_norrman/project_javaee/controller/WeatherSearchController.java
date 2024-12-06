@@ -25,7 +25,7 @@ public class WeatherSearchController {
     }
 
     private WeatherDataDTO fetchWeatherData(String city) {
-        String weatherApiUrl = "http://localhost:8081/weather?city=" + city;
+        String weatherApiUrl = "http://weatherapp:8081/weather?city=" + city;
         System.out.println("Calling WeatherApp API with URL: " + weatherApiUrl);
         try {
             WeatherDataDTO weatherData = restTemplate.getForObject(weatherApiUrl, WeatherDataDTO.class);

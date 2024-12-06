@@ -25,7 +25,7 @@ public class ForecastSearchController {
     }
 
     private ForecastDataDTO fetchForecastData(String city) {
-        String forecastApiUrl = "http://localhost:8081/forecast?city=" + city;
+        String forecastApiUrl = "http://weatherapp:8081/forecast?city=" + city;
         System.out.println("Calling WeatherApp API for forecast with URL: " + forecastApiUrl);
         try {
             ForecastDataDTO forecastData = restTemplate.getForObject(forecastApiUrl, ForecastDataDTO.class);
