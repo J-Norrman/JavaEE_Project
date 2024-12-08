@@ -29,7 +29,6 @@ public class AppSecurityConfig {
         return authenticationConfiguration.getAuthenticationManager();
     }
 
-
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
@@ -58,7 +57,6 @@ public class AppSecurityConfig {
                         .invalidateHttpSession(true)
                         .deleteCookies("JSESSIONID")
                 )
-                // TODO- Persistence token implementation?
                 .rememberMe(Customizer.withDefaults()).userDetailsService(customUserDetailsService);
 
         return http.build();
