@@ -4,7 +4,6 @@ import com.j_norrman.project_javaee.authorities.UserRole;
 import com.j_norrman.project_javaee.model.CustomUser;
 import com.j_norrman.project_javaee.repository.UserRepository;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service

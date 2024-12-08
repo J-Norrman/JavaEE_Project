@@ -1,7 +1,7 @@
 
 services:
   app:
-    image: project-javaee:latest
+    image: joelnorrman/project-java-ee:app-latest
     build:
       context: .
       dockerfile: Dockerfile
@@ -18,8 +18,9 @@ services:
       - backend
 
   weatherapp:
+    image: joelnorrman/project-java-ee:weatherapp-latest
     build:
-      context: ../../webservice/weatherapp  # Path to the second app's directory
+      context: ../../webservice/weatherapp
     ports:
       - "8081:8081"
     environment:
@@ -30,7 +31,7 @@ services:
       - backend
 
   db:
-    image: postgres:latest
+    image: joelnorrman/project-java-ee:postgres-db-latest
     container_name: postgres-db
     environment:
       POSTGRES_DB: JavaEE
