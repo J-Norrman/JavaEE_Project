@@ -14,7 +14,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
-
 @Configuration
 @EnableWebSecurity
 public class AppSecurityConfig {
@@ -24,7 +23,6 @@ public class AppSecurityConfig {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
-
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
